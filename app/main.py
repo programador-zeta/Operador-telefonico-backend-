@@ -1,6 +1,7 @@
 import json
 import secrets
 from contextlib import asynccontextmanager
+from datetime import datetime, timedelta
 from typing import Any
 
 from fastapi import Body, Depends, FastAPI, Header, HTTPException
@@ -13,10 +14,18 @@ from app.dashboard import render_agenda
 from app.database import init_db, insert, list_rows, log_tool_event
 from app.schemas import (
     AppointmentCreate,
+    AvailabilityCheck,
     KnowledgeCreate,
     MetricCreate,
     NoteCreate,
 )
+
+
+DEFAULT_APPOINTMENT_MINUTES = 30
+
+
+class AppointmentUnavailable(ValueError):
+    pass
 
 
 @asynccontextmanager
@@ -90,8 +99,72 @@ def get_appointments() -> list[dict]:
     return list_rows("appointments")
 
 
+def appointment_availability(item: AvailabilityCheck) -> dict[str, Any]:
+    requested_start = item.starts_at
+    requested_end = requested_start + timedelta(minutes=item.duration_minutes)
+
+    scheduled_starts = []
+    for appointment in list_rows("appointments"):
+        if appointment.get("status", "scheduled") != "scheduled":
+            continue
+        existing_start = datetime.fromisoformat(appointment["starts_at"])
+        if existing_start.tzinfo is None:
+            existing_start = existing_start.replace(tzinfo=requested_start.tzinfo)
+        else:
+            existing_start = existing_start.astimezone(requested_start.tzinfo)
+        scheduled_starts.append(existing_start)
+
+    def is_free(candidate_start: datetime) -> bool:
+        candidate_end = candidate_start + timedelta(minutes=item.duration_minutes)
+        return all(
+            not (
+                candidate_start < existing_start + timedelta(minutes=DEFAULT_APPOINTMENT_MINUTES)
+                and candidate_end > existing_start
+            )
+            for existing_start in scheduled_starts
+        )
+
+    available = is_free(requested_start)
+    alternatives: list[str] = []
+    if not available:
+        candidate = requested_start + timedelta(minutes=30)
+        for _ in range(48):
+            if is_free(candidate):
+                alternatives.append(candidate.isoformat())
+                if len(alternatives) == 3:
+                    break
+            candidate += timedelta(minutes=30)
+
+    return {
+        "available": available,
+        "requested_start": requested_start.isoformat(),
+        "duration_minutes": item.duration_minutes,
+        "alternatives": alternatives,
+    }
+
+
+@app.post(
+    "/api/appointments/availability",
+    dependencies=[Depends(require_api_key)],
+)
+def check_appointment_availability(item: AvailabilityCheck) -> dict[str, Any]:
+    return appointment_availability(item)
+
+
 @app.post("/api/appointments", dependencies=[Depends(require_api_key)])
 def create_appointment(item: AppointmentCreate) -> dict:
+    availability = appointment_availability(
+        AvailabilityCheck(
+            starts_at=item.starts_at,
+            duration_minutes=DEFAULT_APPOINTMENT_MINUTES,
+        )
+    )
+    if not availability["available"]:
+        alternatives = ", ".join(availability["alternatives"])
+        raise AppointmentUnavailable(
+            "El horario solicitado ya está ocupado. No se creó la cita. "
+            f"Opciones disponibles: {alternatives}."
+        )
     data = item.model_dump()
     data["starts_at"] = item.starts_at.isoformat()
     return insert("appointments", data)
@@ -130,6 +203,9 @@ def run_tool(name: str, arguments: dict[str, Any]) -> str:
     }.get(name, name)
     handlers = {
         "create_appointment": lambda args: create_appointment(AppointmentCreate(**args)),
+        "check_availability": lambda args: check_appointment_availability(
+            AvailabilityCheck(**args)
+        ),
         "save_note": lambda args: create_note(NoteCreate(**args)),
         "record_metric": lambda args: create_metric(MetricCreate(**args)),
         "get_knowledge": lambda _: get_knowledge(),
@@ -143,6 +219,17 @@ def run_tool(name: str, arguments: dict[str, Any]) -> str:
             "Cita agendada correctamente. "
             f"Folio {result['id']}, cliente {result['customer_name']}, "
             f"servicio {result['service']}, fecha y hora {result['starts_at']}."
+        )
+    if canonical_name == "check_availability":
+        if result["available"]:
+            return (
+                f"El horario {result['requested_start']} está disponible para una cita "
+                f"de {result['duration_minutes']} minutos."
+            )
+        alternatives = ", ".join(result["alternatives"])
+        return (
+            f"El horario {result['requested_start']} no está disponible. "
+            f"Opciones disponibles: {alternatives}."
         )
     return json.dumps(result, ensure_ascii=False, separators=(",", ":"))
 
@@ -188,6 +275,8 @@ def extract_tool_calls(message: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def friendly_tool_error(exc: Exception) -> str:
+    if isinstance(exc, AppointmentUnavailable):
+        return str(exc)
     if isinstance(exc, ValidationError):
         errors = exc.errors(include_url=False)
         fields = {str(error.get("loc", [""])[-1]) for error in errors}
