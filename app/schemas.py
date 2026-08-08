@@ -84,6 +84,16 @@ class AppointmentCreate(BaseModel):
         return value
 
 
+class AvailabilityCheck(BaseModel):
+    starts_at: datetime
+    duration_minutes: int = Field(default=30, ge=15, le=240)
+
+    @field_validator("starts_at")
+    @classmethod
+    def ensure_timezone(cls, value: datetime) -> datetime:
+        return AppointmentCreate.ensure_timezone(value)
+
+
 class NoteCreate(BaseModel):
     customer_phone: str | None = Field(default=None, max_length=30)
     content: str = Field(min_length=1, max_length=2000)
