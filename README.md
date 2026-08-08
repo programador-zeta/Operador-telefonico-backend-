@@ -29,6 +29,10 @@ uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
 Los endpoints `/api/*` y `/vapi/tools` aceptan el encabezado `x-api-key` con el valor configurado en `.env`.
 
+La agenda visual está en `/agenda` y solicita usuario y contraseña. Configura
+`DASHBOARD_USER` y `DASHBOARD_PASSWORD`; si no defines una contraseña específica,
+usa el valor de `API_KEY`.
+
 ## Prueba de tool para Vapi
 
 ```bash
