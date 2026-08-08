@@ -13,6 +13,8 @@ class Settings:
         self.app_name = os.getenv("APP_NAME", "Operador Telefonico MVP")
         self.app_env = os.getenv("APP_ENV", "development")
         self.api_key = os.getenv("API_KEY", "")
+        self.dashboard_user = os.getenv("DASHBOARD_USER", "admin")
+        self.dashboard_password = os.getenv("DASHBOARD_PASSWORD", "") or self.api_key
         self.database_path = Path(os.getenv("DATABASE_PATH", "./data/mvp.db"))
         database_url = os.getenv("DATABASE_URL", "").strip()
         # Render may provide the legacy postgres:// prefix.

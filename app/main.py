@@ -1,11 +1,15 @@
 import json
+import secrets
 from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import Body, Depends, FastAPI, Header, HTTPException
+from fastapi.responses import HTMLResponse
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import ValidationError
 
 from app.config import Settings, get_settings
+from app.dashboard import render_agenda
 from app.database import init_db, insert, list_rows, log_tool_event
 from app.schemas import (
     AppointmentCreate,
@@ -22,6 +26,7 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title=get_settings().app_name, version="0.1.0", lifespan=lifespan)
+dashboard_security = HTTPBasic(auto_error=False)
 
 
 def require_api_key(
@@ -32,6 +37,25 @@ def require_api_key(
         raise HTTPException(status_code=401, detail="Invalid API key")
 
 
+def require_dashboard_login(
+    credentials: HTTPBasicCredentials | None = Depends(dashboard_security),
+    settings: Settings = Depends(get_settings),
+) -> None:
+    if not settings.dashboard_password:
+        raise HTTPException(status_code=503, detail="Dashboard password is not configured")
+    valid = credentials is not None and secrets.compare_digest(
+        credentials.username.encode(), settings.dashboard_user.encode()
+    ) and secrets.compare_digest(
+        credentials.password.encode(), settings.dashboard_password.encode()
+    )
+    if not valid:
+        raise HTTPException(
+            status_code=401,
+            detail="Credenciales incorrectas",
+            headers={"WWW-Authenticate": 'Basic realm="Agenda"'},
+        )
+
+
 @app.get("/")
 def root() -> dict[str, str]:
     return {"service": get_settings().app_name, "status": "online"}
@@ -40,6 +64,15 @@ def root() -> dict[str, str]:
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get(
+    "/agenda",
+    response_class=HTMLResponse,
+    dependencies=[Depends(require_dashboard_login)],
+)
+def agenda() -> HTMLResponse:
+    return HTMLResponse(render_agenda(list_rows("appointments")))
 
 
 @app.get("/api/knowledge", dependencies=[Depends(require_api_key)])
