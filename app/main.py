@@ -12,6 +12,7 @@ from pydantic import ValidationError
 from app.config import Settings, get_settings
 from app.dashboard import render_agenda
 from app.database import init_db, insert, list_rows, log_tool_event
+from app.notifications import send_appointment_confirmation
 from app.schemas import (
     AppointmentCreate,
     AvailabilityCheck,
@@ -167,7 +168,9 @@ def create_appointment(item: AppointmentCreate) -> dict:
         )
     data = item.model_dump()
     data["starts_at"] = item.starts_at.isoformat()
-    return insert("appointments", data)
+    appointment = insert("appointments", data)
+    appointment["whatsapp"] = send_appointment_confirmation(appointment)
+    return appointment
 
 
 @app.get("/api/notes", dependencies=[Depends(require_api_key)])
@@ -215,11 +218,20 @@ def run_tool(name: str, arguments: dict[str, Any]) -> str:
         raise ValueError(f"Unknown tool: {name}")
     result = handler(arguments)
     if canonical_name == "create_appointment":
-        return (
+        result_message = (
             "Cita agendada correctamente. "
             f"Folio {result['id']}, cliente {result['customer_name']}, "
             f"servicio {result['service']}, fecha y hora {result['starts_at']}."
         )
+        whatsapp_status = result.get("whatsapp", {}).get("status")
+        if whatsapp_status == "sent":
+            return result_message + " Confirmación enviada por WhatsApp."
+        if whatsapp_status == "failed":
+            return (
+                result_message
+                + " La cita quedó guardada, pero no se pudo enviar la confirmación por WhatsApp."
+            )
+        return result_message
     if canonical_name == "check_availability":
         if result["available"]:
             return (
