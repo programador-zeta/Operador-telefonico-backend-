@@ -16,6 +16,21 @@ def _whatsapp_address(phone: str) -> str:
     return f"whatsapp:{phone}"
 
 
+def _twilio_whatsapp_recipient(phone: str) -> str:
+    """Format a destination for Twilio's WhatsApp channel.
+
+    Twilio requires Mexican mobile WhatsApp destinations to include the legacy
+    mobile marker after the country code (``+521``), even though the canonical
+    phone number stored by the application remains ``+52``.
+    """
+    address = _whatsapp_address(phone)
+    if address.startswith("whatsapp:+52") and not address.startswith("whatsapp:+521"):
+        local_number = address.removeprefix("whatsapp:+52")
+        if len(local_number) == 10:
+            return f"whatsapp:+521{local_number}"
+    return address
+
+
 def _appointment_template_variables(starts_at: str) -> dict[str, str]:
     appointment_time = datetime.fromisoformat(starts_at)
     return {
@@ -54,7 +69,7 @@ def send_appointment_confirmation(
         )
         message = client.messages.create(
             from_=_whatsapp_address(settings.twilio_whatsapp_from),
-            to=_whatsapp_address(appointment["customer_phone"]),
+            to=_twilio_whatsapp_recipient(appointment["customer_phone"]),
             content_sid=settings.twilio_appointment_content_sid,
             content_variables=json.dumps(
                 _appointment_template_variables(appointment["starts_at"]),
