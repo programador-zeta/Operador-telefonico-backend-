@@ -33,6 +33,16 @@ La agenda visual está en `/agenda` y solicita usuario y contraseña. Configura
 `DASHBOARD_USER` y `DASHBOARD_PASSWORD`; si no defines una contraseña específica,
 usa el valor de `API_KEY`.
 
+## Confirmaciones por WhatsApp
+
+Al crear una cita, el backend intenta enviar una confirmación con la plantilla de
+Twilio configurada. Si Twilio falla, la cita permanece guardada y Vapi recibe un
+mensaje claro sobre el estado del envío.
+
+Configura `TWILIO_ACCOUNT_SID` y `TWILIO_AUTH_TOKEN` directamente en Render. No
+guardes esas credenciales en GitHub. Durante las pruebas se usa el Sandbox de
+Twilio; en producción hay que registrar el remitente de WhatsApp del negocio.
+
 ## Prueba de tool para Vapi
 
 ```bash
