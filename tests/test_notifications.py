@@ -23,17 +23,20 @@ class WhatsAppNotificationTests(unittest.TestCase):
             "twilio_auth_token": "secret-test-token",
             "twilio_whatsapp_from": "whatsapp:+14155238886",
             "twilio_appointment_content_sid": "HX-test-template",
+            "business_name": "Clínica Nova",
         }
         values.update(overrides)
         return SimpleNamespace(**values)
 
     def appointment(self):
         return {
+            "customer_name": "Giovani Cárdenas",
             "customer_phone": "+525512345678",
+            "service": "Consulta general",
             "starts_at": "2026-08-10T16:30:00-06:00",
         }
 
-    def test_sends_approved_template_with_date_and_time(self) -> None:
+    def test_sends_personalized_template(self) -> None:
         messages = FakeMessages()
         client = SimpleNamespace(messages=messages)
 
@@ -44,13 +47,28 @@ class WhatsAppNotificationTests(unittest.TestCase):
         )
 
         self.assertEqual(result, {"status": "sent", "message_sid": "SM-test-message"})
-        self.assertEqual(messages.kwargs["to"], "whatsapp:+525512345678")
+        self.assertEqual(messages.kwargs["to"], "whatsapp:+5215512345678")
         self.assertEqual(messages.kwargs["from_"], "whatsapp:+14155238886")
         self.assertEqual(messages.kwargs["content_sid"], "HX-test-template")
         self.assertEqual(
             messages.kwargs["content_variables"],
-            '{"1":"10/08/2026","2":"16:30"}',
+            '{"1":"Giovani Cárdenas","2":"Clínica Nova",'
+            '"3":"Consulta general","4":"10/08/2026","5":"16:30"}',
         )
+
+    def test_non_mexican_recipient_is_not_changed(self) -> None:
+        messages = FakeMessages()
+        client = SimpleNamespace(messages=messages)
+        appointment = self.appointment()
+        appointment["customer_phone"] = "+16285550100"
+
+        send_appointment_confirmation(
+            appointment,
+            settings=self.settings(),
+            client_factory=lambda _sid, _token: client,
+        )
+
+        self.assertEqual(messages.kwargs["to"], "whatsapp:+16285550100")
 
     def test_missing_credentials_disables_delivery(self) -> None:
         result = send_appointment_confirmation(
