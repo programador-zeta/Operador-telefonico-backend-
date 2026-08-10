@@ -31,11 +31,17 @@ def _twilio_whatsapp_recipient(phone: str) -> str:
     return address
 
 
-def _appointment_template_variables(starts_at: str) -> dict[str, str]:
-    appointment_time = datetime.fromisoformat(starts_at)
+def _appointment_template_variables(
+    appointment: dict[str, Any],
+    business_name: str,
+) -> dict[str, str]:
+    appointment_time = datetime.fromisoformat(appointment["starts_at"])
     return {
-        "1": appointment_time.strftime("%d/%m/%Y"),
-        "2": appointment_time.strftime("%H:%M"),
+        "1": str(appointment["customer_name"]),
+        "2": business_name,
+        "3": str(appointment["service"]),
+        "4": appointment_time.strftime("%d/%m/%Y"),
+        "5": appointment_time.strftime("%H:%M"),
     }
 
 
@@ -72,8 +78,9 @@ def send_appointment_confirmation(
             to=_twilio_whatsapp_recipient(appointment["customer_phone"]),
             content_sid=settings.twilio_appointment_content_sid,
             content_variables=json.dumps(
-                _appointment_template_variables(appointment["starts_at"]),
+                _appointment_template_variables(appointment, settings.business_name),
                 separators=(",", ":"),
+                ensure_ascii=False,
             ),
         )
         return {"status": "sent", "message_sid": str(message.sid)}
