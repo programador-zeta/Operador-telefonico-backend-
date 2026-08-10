@@ -11,6 +11,7 @@ class Settings:
         import os
 
         self.app_name = os.getenv("APP_NAME", "Operador Telefonico MVP")
+        self.business_name = os.getenv("BUSINESS_NAME", "Clínica Nova").strip()
         self.app_env = os.getenv("APP_ENV", "development")
         self.api_key = os.getenv("API_KEY", "")
         self.dashboard_user = os.getenv("DASHBOARD_USER", "admin")
