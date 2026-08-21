@@ -2,6 +2,7 @@ import json
 import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Any
 
 from fastapi import Body, Depends, FastAPI, Header, HTTPException
@@ -23,6 +24,11 @@ from app.schemas import (
 
 
 DEFAULT_APPOINTMENT_MINUTES = 30
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+LANDING_PAGE_PATHS = (
+    PROJECT_ROOT / "index.html",
+    PROJECT_ROOT / "nodic-site" / "src" / "index.html",
+)
 
 
 class AppointmentUnavailable(ValueError):
@@ -66,9 +72,12 @@ def require_dashboard_login(
         )
 
 
-@app.get("/")
-def root() -> dict[str, str]:
-    return {"service": get_settings().app_name, "status": "online"}
+@app.get("/", response_class=HTMLResponse)
+def root() -> HTMLResponse:
+    for path in LANDING_PAGE_PATHS:
+        if path.exists():
+            return HTMLResponse(path.read_text(encoding="utf-8"))
+    raise HTTPException(status_code=503, detail="Landing page is not available")
 
 
 @app.get("/health")
