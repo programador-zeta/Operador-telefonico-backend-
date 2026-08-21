@@ -155,18 +155,28 @@
       .company-item p { color: var(--muted); font-size: 14px; margin: 0; }
 
       .purpose { padding-top: 0; background: var(--white); }
-      .purpose-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 84px; align-items: center; }
-      .purpose-copy { display: grid; gap: 0; }
-      .purpose-item { padding: 27px 0; border-top: 1px solid var(--line); }
-      .purpose-item:last-child { border-bottom: 1px solid var(--line); }
-      .purpose-item span { display: block; color: var(--teal); font: 700 11px 'Manrope'; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
-      .purpose-item h3 { font-size: 24px; letter-spacing: -.04em; margin-bottom: 11px; }
-      .purpose-item p { color: var(--muted); margin-bottom: 0; }
+      .purpose-grid { display: grid; grid-template-columns: .86fr 1.14fr; gap: 84px; align-items: start; }
+      .purpose-lead h2 { font-size: clamp(34px, 4vw, 56px); margin-bottom: 24px; }
+      .purpose-belief { color: var(--muted); font-size: 18px; margin: 0 0 36px; }
+      .mission-block { padding: 27px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .mission-block span, .vision-card span { display: block; color: var(--teal); font: 700 11px 'Manrope'; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
+      .mission-block h3 { font-size: 24px; letter-spacing: -.04em; margin-bottom: 11px; }
+      .mission-block p { color: var(--muted); margin-bottom: 0; }
       .builder-visual { margin: 0; }
       .builder-frame { overflow: hidden; border-radius: var(--radius); border: 1px solid var(--soft-line); background: #f2eee6; }
       .builder-frame img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
       .builder-visual figcaption { display: flex; justify-content: space-between; gap: 22px; padding-top: 16px; color: var(--muted); font-size: 12px; }
       .builder-visual figcaption strong { color: var(--ink); font-family: 'Manrope'; }
+      .vision-card { margin-top: 30px; padding: 31px; border-radius: var(--radius); background: var(--ink); color: white; }
+      .vision-card span { color: var(--mint); }
+      .vision-card h3 { margin: 0; font-size: 24px; line-height: 1.35; letter-spacing: -.035em; }
+
+      .founder { padding-top: 0; background: var(--white); }
+      .founder-card { display: grid; grid-template-columns: .34fr .66fr; gap: 70px; padding: 54px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); align-items: start; }
+      .founder-mark { width: 90px; height: 90px; border-radius: 28px; background: var(--mint); color: var(--ink); display: grid; place-items: center; font: 800 26px 'Manrope'; }
+      .founder-copy h2 { margin-bottom: 23px; }
+      .founder-copy p { color: var(--muted); font-size: 17px; max-width: 760px; }
+      .founder-copy p:last-child { margin-bottom: 0; }
 
       .product-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 88px; align-items: center; }
       .product-copy h2 { margin-bottom: 25px; }
@@ -242,7 +252,7 @@
         .nav-links a { padding: 10px; }
         .menu { display: block; }
         .nav-inner > .nav-cta { display: none; }
-        .hero-grid, .section-intro, .product-grid, .purpose-grid, .faq-grid, .contact-card { grid-template-columns: 1fr; gap: 42px; }
+        .hero-grid, .section-intro, .product-grid, .purpose-grid, .founder-card, .faq-grid, .contact-card { grid-template-columns: 1fr; gap: 42px; }
         .hero-aside { border-left: 0; border-top: 1px solid var(--line); padding: 30px 0 0; }
         .company-grid, .value-grid { grid-template-columns: 1fr; }
         .company-item, .company-item + .company-item { padding: 26px 0; border-right: 0; border-bottom: 1px solid var(--line); min-height: auto; }
@@ -279,6 +289,7 @@
         <nav class="nav-links" id="navLinks">
           <a href="#nodic">NODIC</a>
           <a href="#vision">Visión</a>
+          <a href="#fundador">Fundador</a>
           <a href="#herox">HeroX</a>
           <a href="#planes">Planes</a>
           <a class="button nav-cta" href="#contacto">Solicitar demostración</a>
@@ -325,27 +336,43 @@
 
       <section class="purpose" id="vision">
         <div class="container purpose-grid">
-          <div>
+          <div class="purpose-lead">
             <div class="section-label">Dirección de NODIC AI</div>
-            <div class="purpose-copy">
-              <article class="purpose-item">
-                <span>Misión</span>
-                <h3>Convertir tecnología en capacidad de trabajo.</h3>
-                <p>Crear empleados digitales especializados que asuman funciones operativas reales y permitan a las empresas crecer con mayor continuidad, control y capacidad.</p>
-              </article>
-              <article class="purpose-item">
-                <span>Visión</span>
-                <h3>Construir la próxima fuerza laboral digital.</h3>
-                <p>Ser la infraestructura desde la que empresas y personas incorporen, administren y escalen equipos completos de trabajadores digitales.</p>
-              </article>
-            </div>
+            <h2>La IA como siguiente paso para la evolución empresarial.</h2>
+            <p class="purpose-belief">En NODIC AI creemos que la inteligencia artificial representa una nueva etapa en la evolución de las empresas.</p>
+            <article class="mission-block">
+              <span>Misión</span>
+              <h3>Desarrollar empleados digitales capaces de asumir trabajo operativo real.</h3>
+              <p>Nuestra misión es desarrollar empleados digitales capaces de asumir tareas operativas repetitivas y de alto volumen, permitiendo que las organizaciones reduzcan costos, aumenten su capacidad operativa y aprovechen mejor el talento humano.</p>
+            </article>
           </div>
-          <figure class="builder-visual">
-            <div class="builder-frame">
-              <img src="https://raw.githubusercontent.com/programador-zeta/Operador-telefonico-backend-/main/nodic-builder.webp" alt="Robot constructor de NODIC ensamblando nuevos módulos y empleados digitales" width="1440" height="960" loading="lazy" />
-            </div>
-            <figcaption><strong>Hoy, HeroX.</strong><span>Mañana, una familia completa de empleados digitales.</span></figcaption>
-          </figure>
+          <div>
+            <figure class="builder-visual">
+              <div class="builder-frame">
+                <img src="https://raw.githubusercontent.com/programador-zeta/Operador-telefonico-backend-/main/nodic-builder.webp?v=2" alt="Pequeño robot de NODIC programando en un entorno digital" width="1440" height="960" loading="lazy" />
+              </div>
+              <figcaption><strong>Hoy, HeroX.</strong><span>Mañana, una familia completa de empleados digitales.</span></figcaption>
+            </figure>
+            <article class="vision-card">
+              <span>Visión</span>
+              <h3>Construir un ecosistema de empleados digitales especializados que permita a las empresas integrar equipos formados por personas y tecnología, impulsando una nueva forma de trabajar basada en la eficiencia, la innovación y el crecimiento.</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="founder" id="fundador">
+        <div class="container founder-card">
+          <div>
+            <div class="section-label">Sobre el fundador</div>
+            <div class="founder-mark" aria-hidden="true">GC</div>
+          </div>
+          <div class="founder-copy">
+            <h2>Hola, soy Giovani Cárdenas, fundador de NODIC AI.</h2>
+            <p>Mi objetivo es acercar la inteligencia artificial a las empresas mediante soluciones tecnológicas capaces de generar un impacto real en sus operaciones.</p>
+            <p>Por ello, trabajamos en el desarrollo de empleados digitales diseñados para asumir funciones específicas, sostener mayores volúmenes de trabajo y permitir que las empresas concentren sus esfuerzos en actividades estratégicas.</p>
+            <p>NODIC AI nace con la convicción de que la inteligencia artificial puede convertirse en una herramienta accesible para cualquier organización, independientemente de su tamaño o sector.</p>
+          </div>
         </div>
       </section>
 
