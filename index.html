@@ -3,31 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#07110f" />
+    <meta name="theme-color" content="#f6f4ee" />
     <meta
       name="description"
-      content="NODIC AI crea empleados digitales especializados. HeroX atiende llamadas, resuelve dudas, agenda y escala casos para empresas."
+      content="NODIC AI crea empleados digitales especializados para que las empresas incorporen capacidad de trabajo, no más herramientas."
     />
     <meta property="og:title" content="NODIC AI — Fuerza laboral digital" />
-    <meta property="og:description" content="HeroX atiende llamadas y las convierte en citas, seguimiento y resultados para tu empresa." />
+    <meta property="og:description" content="Empleados digitales especializados, diseñados para realizar trabajo real dentro de tu empresa." />
     <meta property="og:type" content="website" />
     <title>NODIC AI | Fuerza laboral digital</title>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap');
 
       :root {
         --ink: #07110f;
-        --ink-soft: #10201c;
-        --paper: #f5f3ed;
-        --paper-deep: #e9e6dd;
+        --paper: #f6f4ee;
+        --white: #fcfbf8;
         --mint: #65e5b8;
-        --mint-bright: #9cf4d4;
         --teal: #0f6b59;
+        --muted: #65716d;
         --line: rgba(7, 17, 15, 0.14);
-        --white-line: rgba(255, 255, 255, 0.13);
-        --muted: #61706b;
-        --radius: 24px;
-        --shadow: 0 30px 80px rgba(7, 17, 15, 0.15);
+        --soft-line: rgba(7, 17, 15, 0.08);
+        --radius: 20px;
       }
 
       * { box-sizing: border-box; }
@@ -38,429 +35,390 @@
         color: var(--ink);
         font-family: 'DM Sans', system-ui, sans-serif;
         font-size: 16px;
-        line-height: 1.5;
+        line-height: 1.55;
         overflow-x: hidden;
-      }
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: .24;
-        background-image: radial-gradient(rgba(7,17,15,.16) .55px, transparent .55px);
-        background-size: 5px 5px;
-        z-index: 20;
-        mix-blend-mode: multiply;
       }
       a { color: inherit; text-decoration: none; }
       button, a { -webkit-tap-highlight-color: transparent; }
-      .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1, h2, h3 { font-family: 'Manrope', system-ui, sans-serif; }
+      .container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
 
       .nav {
-        position: fixed;
+        position: sticky;
+        top: 0;
         z-index: 50;
-        top: 18px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(1180px, calc(100% - 32px));
-        height: 68px;
-        border: 1px solid rgba(255,255,255,.12);
-        border-radius: 18px;
-        background: rgba(7,17,15,.88);
-        backdrop-filter: blur(18px);
-        color: white;
+        border-bottom: 1px solid var(--soft-line);
+        background: rgba(246, 244, 238, 0.92);
+        backdrop-filter: blur(16px);
+      }
+      .nav-inner {
+        min-height: 74px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 12px 0 22px;
-        box-shadow: 0 16px 40px rgba(7,17,15,.18);
+        gap: 28px;
       }
-      .brand { display: flex; align-items: center; gap: 12px; font-family: 'Manrope'; font-weight: 800; letter-spacing: -.04em; font-size: 20px; }
-      .brand-mark { width: 27px; height: 27px; border-radius: 9px 9px 9px 3px; background: var(--mint); position: relative; transform: rotate(-7deg); }
-      .brand-mark::after { content: ''; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); right: 5px; top: 5px; }
-      .brand small { color: var(--mint); font-size: 11px; letter-spacing: .16em; font-weight: 700; margin-left: 1px; }
-      .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; color: rgba(255,255,255,.74); }
-      .nav-links a:hover { color: white; }
-      .nav-cta, .button {
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        font: 800 19px 'Manrope';
+        letter-spacing: -.045em;
+      }
+      .brand-mark {
+        width: 24px;
+        height: 24px;
+        border-radius: 8px 8px 8px 3px;
+        background: var(--mint);
+        position: relative;
+        transform: rotate(-7deg);
+      }
+      .brand-mark::after {
+        content: '';
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--ink);
+        right: 4px;
+        top: 4px;
+      }
+      .brand small { color: var(--teal); font-size: 10px; letter-spacing: .14em; }
+      .nav-links { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: 14px; }
+      .nav-links a:hover { color: var(--ink); }
+      .button {
+        min-height: 47px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        min-height: 46px;
-        border-radius: 13px;
-        padding: 0 20px;
-        border: 0;
-        background: var(--mint);
-        color: var(--ink);
-        font-weight: 700;
-        transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
-      }
-      .nav-cta:hover, .button:hover { transform: translateY(-2px); background: var(--mint-bright); box-shadow: 0 12px 28px rgba(101,229,184,.22); }
-      .button.secondary { background: transparent; color: white; border: 1px solid rgba(255,255,255,.22); }
-      .button.secondary:hover { background: rgba(255,255,255,.07); box-shadow: none; }
-      .menu { display: none; width: 44px; height: 44px; border: 0; border-radius: 12px; background: rgba(255,255,255,.08); color: white; font-size: 21px; }
-
-      .hero {
-        min-height: 860px;
+        gap: 9px;
+        padding: 0 21px;
+        border-radius: 12px;
+        border: 1px solid var(--ink);
         background: var(--ink);
         color: white;
-        position: relative;
-        overflow: hidden;
-        padding: 178px 0 110px;
+        font-weight: 600;
+        transition: transform .2s ease, background .2s ease;
       }
-      .hero::before {
-        content: '';
-        position: absolute;
-        width: 780px;
-        height: 780px;
-        border-radius: 50%;
-        right: -300px;
-        top: -290px;
-        background: radial-gradient(circle at 42% 55%, rgba(101,229,184,.42), rgba(15,107,89,.12) 42%, transparent 68%);
-        filter: blur(4px);
+      .button:hover { transform: translateY(-2px); background: #13221e; }
+      .button.light { background: transparent; color: var(--ink); border-color: var(--line); }
+      .button.light:hover { background: var(--white); }
+      .nav-cta { min-height: 42px; padding: 0 17px; font-size: 14px; }
+      .menu { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 11px; background: transparent; font-size: 20px; color: var(--ink); }
+
+      .hero { padding: 116px 0 104px; border-bottom: 1px solid var(--line); }
+      .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 100px; align-items: end; }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--teal);
+        text-transform: uppercase;
+        letter-spacing: .16em;
+        font-size: 11px;
+        font-weight: 700;
       }
-      .hero::after {
-        content: '';
-        position: absolute;
-        inset: auto -10% -280px;
-        height: 430px;
-        border: 1px solid rgba(101,229,184,.16);
-        border-radius: 50%;
-        transform: rotate(-5deg);
-        box-shadow: 0 -60px 160px rgba(101,229,184,.06);
+      .eyebrow::before { content: ''; width: 22px; height: 1px; background: currentColor; }
+      h1 {
+        max-width: 850px;
+        margin: 24px 0 30px;
+        font-size: clamp(54px, 7vw, 92px);
+        line-height: .98;
+        letter-spacing: -.072em;
       }
-      .hero-grid { display: grid; grid-template-columns: 1.07fr .93fr; gap: 70px; align-items: center; position: relative; z-index: 2; }
-      .eyebrow { display: inline-flex; gap: 9px; align-items: center; text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 700; color: var(--mint); }
-      .eyebrow::before { content: ''; width: 26px; height: 1px; background: currentColor; }
-      h1, h2, h3, p { margin-top: 0; }
-      h1, h2, h3 { font-family: 'Manrope', system-ui, sans-serif; }
-      h1 { font-size: clamp(54px, 6.4vw, 92px); letter-spacing: -.072em; line-height: .98; margin: 24px 0 28px; max-width: 780px; }
-      h1 span { color: var(--mint); }
-      .hero-copy > p { max-width: 630px; color: rgba(255,255,255,.66); font-size: clamp(18px, 2vw, 22px); line-height: 1.55; }
-      .hero-actions { display: flex; gap: 12px; margin-top: 38px; flex-wrap: wrap; }
-      .hero-proof { display: flex; gap: 30px; margin-top: 52px; color: rgba(255,255,255,.58); font-size: 13px; }
-      .hero-proof span { display: flex; align-items: center; gap: 8px; }
-      .hero-proof i { width: 7px; height: 7px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 0 5px rgba(101,229,184,.09); }
+      h1 span { display: block; color: var(--teal); }
+      .hero-copy > p { max-width: 690px; margin-bottom: 0; color: var(--muted); font-size: clamp(18px, 2vw, 22px); }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 36px; }
+      .hero-aside { border-left: 1px solid var(--line); padding-left: 34px; }
+      .hero-aside > p { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+      .principles { display: grid; gap: 0; border-top: 1px solid var(--line); }
+      .principle { padding: 17px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+      .principle span { color: var(--teal); font: 700 11px 'Manrope'; }
+      .principle strong { font: 600 14px 'Manrope'; }
 
-      .operator-card {
-        border: 1px solid var(--white-line);
-        border-radius: 28px;
-        background: linear-gradient(150deg, rgba(255,255,255,.10), rgba(255,255,255,.035));
-        backdrop-filter: blur(18px);
-        padding: 22px;
-        box-shadow: 0 34px 80px rgba(0,0,0,.26);
-        transform: rotate(1.2deg);
-      }
-      .operator-head { display: flex; align-items: center; justify-content: space-between; padding: 5px 3px 20px; border-bottom: 1px solid var(--white-line); }
-      .operator-id { display: flex; align-items: center; gap: 12px; }
-      .avatar { width: 46px; height: 46px; border-radius: 15px; display: grid; place-items: center; background: var(--mint); color: var(--ink); font: 800 16px 'Manrope'; }
-      .operator-id strong { display: block; font: 700 16px 'Manrope'; }
-      .operator-id small { color: rgba(255,255,255,.5); }
-      .live { display: flex; align-items: center; gap: 7px; color: var(--mint); font-size: 12px; font-weight: 700; }
-      .live::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); animation: pulse 1.8s infinite; }
-      @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(101,229,184,.35); } 50% { box-shadow: 0 0 0 8px rgba(101,229,184,0); } }
-      .call-row { display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 13px; margin-top: 18px; background: rgba(7,17,15,.56); border-radius: 16px; padding: 14px; }
-      .call-icon { width: 42px; height: 42px; border-radius: 13px; background: rgba(101,229,184,.13); color: var(--mint); display: grid; place-items: center; font-size: 18px; }
-      .call-row strong { font-size: 14px; display: block; }
-      .call-row small { color: rgba(255,255,255,.5); }
-      .timer { color: var(--mint); font-variant-numeric: tabular-nums; font-size: 13px; }
-      .transcript { display: grid; gap: 11px; margin: 18px 0; }
-      .bubble { max-width: 84%; padding: 12px 14px; border-radius: 15px; font-size: 13px; line-height: 1.45; }
-      .bubble.client { background: rgba(255,255,255,.08); color: rgba(255,255,255,.72); border-bottom-left-radius: 4px; }
-      .bubble.agent { background: var(--mint); color: var(--ink); justify-self: end; border-bottom-right-radius: 4px; }
-      .result { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-      .result-item { border: 1px solid var(--white-line); border-radius: 15px; padding: 13px; }
-      .result-item span { display: block; color: rgba(255,255,255,.44); text-transform: uppercase; letter-spacing: .1em; font-size: 9px; }
-      .result-item strong { display: block; margin-top: 5px; font-size: 13px; color: rgba(255,255,255,.86); }
+      section { padding: 108px 0; }
+      .section-label { color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 22px; }
+      h2 { font-size: clamp(38px, 5vw, 64px); line-height: 1.05; letter-spacing: -.058em; margin-bottom: 0; }
+      .section-intro { display: grid; grid-template-columns: 1.15fr .85fr; gap: 90px; align-items: end; margin-bottom: 62px; }
+      .section-intro p { color: var(--muted); font-size: 18px; margin-bottom: 3px; max-width: 490px; }
 
-      section { padding: 112px 0; }
-      .section-kicker { color: var(--teal); text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 700; margin-bottom: 18px; }
-      .section-head { display: grid; grid-template-columns: 1.15fr .85fr; gap: 80px; align-items: end; margin-bottom: 58px; }
-      h2 { font-size: clamp(40px, 5vw, 68px); line-height: 1.04; letter-spacing: -.058em; margin-bottom: 0; }
-      .section-head p { color: var(--muted); font-size: 18px; margin: 0; max-width: 470px; }
+      .company { background: var(--white); }
+      .company-statement { max-width: 930px; font: 600 clamp(30px, 4.2vw, 55px)/1.2 'Manrope'; letter-spacing: -.048em; margin: 0; }
+      .company-statement em { color: var(--teal); font-style: normal; }
+      .company-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 76px; border-top: 1px solid var(--line); }
+      .company-item { padding: 28px 36px 4px 0; border-right: 1px solid var(--line); min-height: 165px; }
+      .company-item + .company-item { padding-left: 36px; }
+      .company-item:last-child { border-right: 0; }
+      .company-item span { color: var(--teal); font: 700 11px 'Manrope'; }
+      .company-item h3 { font-size: 19px; margin: 30px 0 8px; letter-spacing: -.03em; }
+      .company-item p { color: var(--muted); font-size: 14px; margin: 0; }
 
-      .truth { background: var(--paper-deep); padding: 68px 0; }
-      .truth-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 70px; align-items: center; }
-      .truth-label { font: 700 14px 'Manrope'; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
-      .truth-quote { font: 700 clamp(28px, 3.2vw, 46px)/1.22 'Manrope'; letter-spacing: -.04em; margin: 0; }
-      .truth-quote em { color: var(--teal); font-style: normal; }
+      .product-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 88px; align-items: center; }
+      .product-copy h2 { margin-bottom: 25px; }
+      .product-copy > p { color: var(--muted); font-size: 18px; max-width: 490px; }
+      .product-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 34px; color: var(--muted); font-size: 13px; }
+      .product-meta span { display: inline-flex; align-items: center; gap: 8px; }
+      .product-meta i { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); border: 1px solid var(--teal); }
+      .work-card { background: var(--ink); color: white; border-radius: var(--radius); padding: 30px; }
+      .work-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,.13); }
+      .work-id { display: flex; align-items: center; gap: 13px; }
+      .avatar { width: 43px; height: 43px; border-radius: 13px; background: var(--mint); color: var(--ink); display: grid; place-items: center; font: 800 14px 'Manrope'; }
+      .work-id strong { display: block; font: 700 15px 'Manrope'; }
+      .work-id small { color: rgba(255,255,255,.5); }
+      .status { color: var(--mint); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      .work-line { padding: 21px 0; border-bottom: 1px solid rgba(255,255,255,.13); display: grid; grid-template-columns: 1fr auto; gap: 20px; }
+      .work-line span { color: rgba(255,255,255,.48); font-size: 12px; display: block; margin-bottom: 5px; }
+      .work-line strong { font-size: 14px; }
+      .work-line b { color: var(--mint); font: 600 13px 'DM Sans'; align-self: center; }
+      .work-result { margin-top: 24px; display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+      .work-result p { color: rgba(255,255,255,.6); font-size: 13px; margin: 0; }
+      .work-result strong { color: var(--mint); font: 700 13px 'Manrope'; white-space: nowrap; }
 
-      .capability-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-      .capability { min-height: 250px; padding: 30px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-      .capability-number { font: 600 12px 'Manrope'; color: var(--teal); letter-spacing: .12em; }
-      .capability h3 { font-size: 23px; letter-spacing: -.035em; margin: 58px 0 12px; }
-      .capability p { color: var(--muted); margin-bottom: 0; }
-      .capability::after { content: ''; position: absolute; width: 90px; height: 90px; border: 1px solid rgba(15,107,89,.16); border-radius: 50%; right: -36px; top: -36px; transition: transform .3s ease; }
-      .capability:hover::after { transform: scale(1.5); }
+      .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+      .value { padding: 30px; min-height: 245px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .value span { color: var(--teal); font: 700 11px 'Manrope'; }
+      .value h3 { margin: 62px 0 12px; font-size: 23px; letter-spacing: -.04em; }
+      .value p { color: var(--muted); margin: 0; }
 
-      .industries { background: var(--ink); color: white; }
-      .industries .section-kicker { color: var(--mint); }
-      .industries .section-head p { color: rgba(255,255,255,.55); }
-      .industry-list { border-top: 1px solid var(--white-line); }
-      .industry { display: grid; grid-template-columns: 64px 1fr 1fr; gap: 28px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--white-line); }
-      .industry-index { color: var(--mint); font: 700 12px 'Manrope'; }
-      .industry h3 { margin: 0; font-size: clamp(23px, 3vw, 34px); letter-spacing: -.04em; }
-      .industry p { margin: 0; color: rgba(255,255,255,.5); }
+      .fit { padding-top: 0; }
+      .fit-list { border-top: 1px solid var(--line); }
+      .fit-row { display: grid; grid-template-columns: 50px .7fr 1.3fr; gap: 32px; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--line); }
+      .fit-row > span { color: var(--teal); font: 700 11px 'Manrope'; }
+      .fit-row h3 { margin: 0; font-size: 23px; letter-spacing: -.035em; }
+      .fit-row p { margin: 0; color: var(--muted); }
 
-      .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-      .step { background: white; border-radius: 20px; padding: 24px; min-height: 230px; border: 1px solid rgba(7,17,15,.07); box-shadow: 0 13px 30px rgba(7,17,15,.04); }
-      .step span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; color: var(--teal); background: rgba(101,229,184,.24); font: 700 12px 'Manrope'; }
-      .step h3 { margin: 52px 0 10px; font-size: 20px; letter-spacing: -.03em; }
-      .step p { color: var(--muted); font-size: 14px; margin-bottom: 0; }
+      .pricing { background: var(--white); }
+      .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+      .plan { display: flex; flex-direction: column; min-height: 390px; padding: 25px; border: 1px solid var(--line); border-radius: 17px; background: transparent; }
+      .plan.featured { border: 2px solid var(--teal); padding: 24px; }
+      .plan-label { min-height: 20px; color: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+      .plan h3 { margin: 22px 0 7px; font-size: 19px; }
+      .price { font: 800 34px/1 'Manrope'; letter-spacing: -.05em; margin: 8px 0; }
+      .price small { display: block; margin-top: 9px; color: var(--muted); font: 500 11px 'DM Sans'; letter-spacing: 0; }
+      .plan ul { list-style: none; padding: 0; margin: 27px 0 30px; display: grid; gap: 11px; color: var(--muted); font-size: 13px; }
+      .plan li::before { content: '—'; margin-right: 8px; color: var(--teal); }
+      .plan .button { margin-top: auto; width: 100%; min-height: 43px; font-size: 13px; }
+      .pricing-note { color: var(--muted); font-size: 13px; margin: 25px 0 0; }
 
-      .pricing { background: #e9efe9; }
-      .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: stretch; }
-      .plan { border-radius: 22px; background: rgba(255,255,255,.68); padding: 26px; border: 1px solid rgba(7,17,15,.09); display: flex; flex-direction: column; min-height: 410px; }
-      .plan.featured { background: var(--ink); color: white; transform: translateY(-12px); box-shadow: var(--shadow); }
-      .plan-badge { min-height: 23px; color: var(--teal); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
-      .featured .plan-badge { color: var(--mint); }
-      .plan h3 { font-size: 20px; margin: 22px 0 6px; }
-      .price { font: 800 38px/1 'Manrope'; letter-spacing: -.05em; margin: 8px 0; }
-      .price small { display: block; font: 500 12px 'DM Sans'; letter-spacing: 0; margin-top: 9px; color: var(--muted); }
-      .featured .price small { color: rgba(255,255,255,.45); }
-      .plan ul { padding: 0; list-style: none; display: grid; gap: 12px; margin: 27px 0 30px; color: var(--muted); font-size: 14px; }
-      .featured ul { color: rgba(255,255,255,.63); }
-      .plan li::before { content: '✓'; color: var(--teal); margin-right: 9px; font-weight: 700; }
-      .featured li::before { color: var(--mint); }
-      .plan .button { margin-top: auto; width: 100%; }
-      .plan:not(.featured) .button { background: transparent; border: 1px solid var(--line); }
-      .plan:not(.featured) .button:hover { background: var(--ink); color: white; box-shadow: none; }
-      .pricing-note { margin-top: 25px; color: var(--muted); font-size: 13px; text-align: center; }
-
-      .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; align-items: start; }
-      .faq-grid h2 { position: sticky; top: 120px; }
-      .faq-item { border-top: 1px solid var(--line); }
-      .faq-item:last-child { border-bottom: 1px solid var(--line); }
-      .faq-question { width: 100%; background: transparent; border: 0; padding: 23px 0; display: flex; justify-content: space-between; gap: 20px; text-align: left; color: var(--ink); font: 700 17px 'Manrope'; cursor: pointer; }
-      .faq-question span:last-child { color: var(--teal); font-size: 22px; transition: transform .2s ease; }
-      .faq-answer { max-height: 0; overflow: hidden; color: var(--muted); transition: max-height .28s ease; }
-      .faq-answer p { padding: 0 40px 23px 0; margin: 0; }
+      .faq { padding-bottom: 70px; }
+      .faq-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; align-items: start; }
+      .faq-list { border-top: 1px solid var(--line); }
+      .faq-item { border-bottom: 1px solid var(--line); }
+      .faq-question { width: 100%; border: 0; background: transparent; padding: 22px 0; display: flex; justify-content: space-between; gap: 24px; text-align: left; color: var(--ink); font: 600 16px 'Manrope'; cursor: pointer; }
+      .faq-question span:last-child { color: var(--teal); font-size: 20px; transition: transform .2s ease; }
+      .faq-answer { max-height: 0; overflow: hidden; color: var(--muted); transition: max-height .25s ease; }
+      .faq-answer p { margin: 0; padding: 0 40px 22px 0; }
       .faq-item.open .faq-answer { max-height: 170px; }
       .faq-item.open .faq-question span:last-child { transform: rotate(45deg); }
 
-      .closing { padding: 28px 0 34px; }
-      .closing-card { background: var(--ink); color: white; border-radius: 30px; padding: 76px; position: relative; overflow: hidden; }
-      .closing-card::after { content: ''; position: absolute; width: 430px; height: 430px; border-radius: 50%; background: radial-gradient(circle, rgba(101,229,184,.28), transparent 65%); right: -150px; top: -190px; }
-      .closing-card > * { position: relative; z-index: 1; }
-      .closing-card h2 { max-width: 820px; margin-bottom: 25px; }
-      .closing-card p { color: rgba(255,255,255,.58); font-size: 18px; max-width: 680px; margin-bottom: 34px; }
+      .contact { padding: 36px 0 32px; }
+      .contact-card { background: var(--ink); color: white; border-radius: 24px; padding: 68px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; align-items: end; }
+      .contact-card h2 { margin-bottom: 22px; }
+      .contact-card p { color: rgba(255,255,255,.58); font-size: 17px; max-width: 650px; margin-bottom: 0; }
+      .contact-card .button { background: var(--mint); color: var(--ink); border-color: var(--mint); justify-self: end; }
+      .contact-card .button:hover { background: #8ceecb; }
 
-      footer { padding: 48px 0; }
-      .footer-grid { display: flex; justify-content: space-between; gap: 28px; align-items: center; color: var(--muted); font-size: 13px; }
-      .footer-brand { color: var(--ink); }
+      footer { padding: 44px 0 48px; }
+      .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 25px; color: var(--muted); font-size: 12px; }
 
       @media (max-width: 980px) {
-        .nav-links { position: fixed; left: 0; right: 0; top: 78px; border-radius: 16px; padding: 20px; background: var(--ink-soft); display: none; flex-direction: column; align-items: stretch; gap: 8px; box-shadow: var(--shadow); }
+        .nav-links { position: fixed; left: 16px; right: 16px; top: 82px; padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: var(--paper); display: none; flex-direction: column; align-items: stretch; gap: 8px; box-shadow: 0 18px 45px rgba(7,17,15,.12); }
         .nav-links.open { display: flex; }
-        .nav-links a { padding: 11px 8px; }
-        .nav-links .nav-cta { margin-top: 4px; }
+        .nav-links a { padding: 10px; }
         .menu { display: block; }
-        .nav > .nav-cta { display: none; }
-        .hero { min-height: auto; padding-top: 150px; }
-        .hero-grid, .section-head, .truth-grid, .faq-grid { grid-template-columns: 1fr; gap: 40px; }
-        .operator-card { max-width: 600px; transform: none; }
-        .section-head { align-items: start; }
-        .capability-grid { grid-template-columns: repeat(2, 1fr); }
-        .process-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-        .plan.featured { transform: none; }
-        .faq-grid h2 { position: static; }
+        .nav-inner > .nav-cta { display: none; }
+        .hero-grid, .section-intro, .product-grid, .faq-grid, .contact-card { grid-template-columns: 1fr; gap: 42px; }
+        .hero-aside { border-left: 0; border-top: 1px solid var(--line); padding: 30px 0 0; }
+        .company-grid, .value-grid { grid-template-columns: 1fr; }
+        .company-item, .company-item + .company-item { padding: 26px 0; border-right: 0; border-bottom: 1px solid var(--line); min-height: auto; }
+        .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        .contact-card .button { justify-self: start; }
       }
       @media (max-width: 650px) {
-        .container { width: min(100% - 28px, 1180px); }
-        .nav { top: 10px; width: calc(100% - 20px); height: 62px; padding-left: 16px; }
-        .hero { padding: 125px 0 78px; }
-        h1 { font-size: 52px; }
-        section { padding: 78px 0; }
-        .hero-proof { display: grid; gap: 13px; }
-        .result { grid-template-columns: 1fr; }
-        .capability-grid, .process-grid, .pricing-grid { grid-template-columns: 1fr; }
-        .capability { min-height: 215px; }
-        .industry { grid-template-columns: 42px 1fr; }
-        .industry p { grid-column: 2; }
-        .closing-card { padding: 48px 26px; }
-        .footer-grid { align-items: flex-start; flex-direction: column; }
+        .container { width: min(100% - 28px, 1120px); }
+        .nav-inner { min-height: 66px; }
+        .hero { padding: 82px 0 74px; }
+        h1 { font-size: 51px; }
+        section { padding: 76px 0; }
+        .section-intro { margin-bottom: 42px; }
+        .fit-row { grid-template-columns: 34px 1fr; gap: 18px; }
+        .fit-row p { grid-column: 2; }
+        .pricing-grid { grid-template-columns: 1fr; }
+        .plan { min-height: auto; }
+        .contact-card { padding: 45px 25px; }
+        .footer-grid { flex-direction: column; align-items: flex-start; }
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        *, *::before, *::after { transition-duration: .01ms !important; }
       }
     </style>
   </head>
   <body>
     <header class="nav" aria-label="Navegación principal">
-      <a class="brand" href="#inicio" aria-label="NODIC AI, inicio">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>NODIC <small>AI</small></span>
-      </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="#producto">HeroX</a>
-        <a href="#sectores">Sectores</a>
-        <a href="#proceso">Implementación</a>
-        <a href="#planes">Planes</a>
-        <a class="nav-cta" href="#contacto">Solicitar demostración</a>
-      </nav>
-      <a class="nav-cta" href="#contacto">Solicitar demostración</a>
-      <button class="menu" id="menuButton" aria-label="Abrir menú" aria-expanded="false">≡</button>
+      <div class="container nav-inner">
+        <a class="brand" href="#inicio" aria-label="NODIC AI, inicio">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>NODIC <small>AI</small></span>
+        </a>
+        <nav class="nav-links" id="navLinks">
+          <a href="#nodic">NODIC</a>
+          <a href="#herox">HeroX</a>
+          <a href="#sectores">Sectores</a>
+          <a href="#planes">Planes</a>
+          <a class="button nav-cta" href="#contacto">Solicitar demostración</a>
+        </nav>
+        <a class="button nav-cta" href="#contacto">Solicitar demostración</a>
+        <button class="menu" id="menuButton" aria-label="Abrir menú" aria-expanded="false">≡</button>
+      </div>
     </header>
 
     <main>
       <section class="hero" id="inicio">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <div class="eyebrow">Fuerza laboral digital</div>
-            <h1>Las llamadas no esperan. <span>HeroX tampoco.</span></h1>
-            <p>El operador telefónico digital que atiende, resuelve dudas autorizadas, agenda y escala cada caso al responsable correcto.</p>
+            <div class="eyebrow">NODIC AI · Fuerza laboral digital</div>
+            <h1>Creamos empleados digitales <span>para empresas.</span></h1>
+            <p>Diseñamos trabajadores especializados que atienden, coordinan y ejecutan funciones reales dentro de una operación.</p>
             <div class="hero-actions">
-              <a class="button" href="#contacto">Ver una demostración <span aria-hidden="true">↗</span></a>
-              <a class="button secondary" href="#producto">Cómo trabaja</a>
-            </div>
-            <div class="hero-proof" aria-label="Beneficios principales">
-              <span><i></i> Atiende cuando tu equipo está ocupado</span>
-              <span><i></i> Configurado para tu operación</span>
+              <a class="button" href="#contacto">Conocer NODIC <span aria-hidden="true">↗</span></a>
+              <a class="button light" href="#herox">Ver nuestro primer empleado</a>
             </div>
           </div>
+          <aside class="hero-aside" aria-label="Principios de NODIC AI">
+            <p>No vendemos automatizaciones aisladas. Incorporamos capacidad de trabajo configurada para cada empresa.</p>
+            <div class="principles">
+              <div class="principle"><span>01</span><strong>Un rol definido</strong></div>
+              <div class="principle"><span>02</span><strong>Trabajo terminado</strong></div>
+              <div class="principle"><span>03</span><strong>Desempeño medible</strong></div>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-          <div class="operator-card" aria-label="Ejemplo de una llamada atendida por HeroX">
-            <div class="operator-head">
-              <div class="operator-id">
-                <div class="avatar">HX</div>
-                <div><strong>HeroX</strong><small>Operador telefónico digital</small></div>
-              </div>
-              <div class="live">En llamada</div>
-            </div>
-            <div class="call-row">
-              <div class="call-icon">⌕</div>
-              <div><strong>Nueva consulta</strong><small>Prospecto · Línea comercial</small></div>
-              <div class="timer" id="timer">01:42</div>
-            </div>
-            <div class="transcript">
-              <div class="bubble client">Quiero conocer disponibilidad y agendar una visita para mañana.</div>
-              <div class="bubble agent">Claro. Revisaré la agenda y te propondré horarios disponibles.</div>
-            </div>
-            <div class="result">
-              <div class="result-item"><span>Intención</span><strong>Solicitud calificada</strong></div>
-              <div class="result-item"><span>Resultado</span><strong>Cita registrada</strong></div>
-            </div>
+      <section class="company" id="nodic">
+        <div class="container">
+          <div class="section-label">Qué es NODIC AI</div>
+          <p class="company-statement">Construimos una nueva categoría de trabajadores: <em>empleados digitales especializados</em> que se integran a la operación de una empresa.</p>
+          <div class="company-grid">
+            <article class="company-item"><span>01</span><h3>Especializados</h3><p>Cada empleado nace para un puesto, objetivos y límites concretos.</p></article>
+            <article class="company-item"><span>02</span><h3>Integrados</h3><p>Trabajan con el conocimiento, las agendas y las reglas de la organización.</p></article>
+            <article class="company-item"><span>03</span><h3>Escalables</h3><p>La capacidad aumenta por líneas, áreas, sucursales o nuevos roles.</p></article>
           </div>
         </div>
       </section>
 
-      <div class="truth">
-        <div class="container truth-grid">
-          <div class="truth-label">La diferencia NODIC</div>
-          <p class="truth-quote">No instalamos otra herramienta. Incorporamos <em>capacidad de trabajo</em> a tu empresa.</p>
-        </div>
-      </div>
-
-      <section id="producto">
-        <div class="container">
-          <div class="section-head">
-            <div><div class="section-kicker">HeroX · Empleado digital 001</div><h2>De una llamada a una acción concreta.</h2></div>
-            <p>HeroX se configura con el conocimiento, las reglas, las agendas y los objetivos de tu empresa. Sabe qué puede resolver y cuándo debe escalar.</p>
+      <section id="herox">
+        <div class="container product-grid">
+          <div class="product-copy">
+            <div class="section-label">Empleado digital 001</div>
+            <h2>HeroX es el primer trabajador creado por NODIC.</h2>
+            <p>Un operador telefónico digital que atiende llamadas, resuelve dudas autorizadas, califica solicitudes, agenda y escala los casos que requieren intervención humana.</p>
+            <div class="product-meta">
+              <span><i></i> Español e inglés</span>
+              <span><i></i> Disponible 24/7</span>
+              <span><i></i> Métricas operativas</span>
+            </div>
           </div>
-          <div class="capability-grid">
-            <article class="capability"><span class="capability-number">01</span><h3>Atiende</h3><p>Recibe llamadas con una conversación breve, clara y profesional.</p></article>
-            <article class="capability"><span class="capability-number">02</span><h3>Resuelve</h3><p>Contesta dudas autorizadas sobre servicios, horarios, ubicación y políticas.</p></article>
-            <article class="capability"><span class="capability-number">03</span><h3>Califica</h3><p>Identifica la necesidad y recopila los datos que tu equipo necesita.</p></article>
-            <article class="capability"><span class="capability-number">04</span><h3>Agenda</h3><p>Consulta disponibilidad, evita cruces y registra citas confirmadas.</p></article>
-            <article class="capability"><span class="capability-number">05</span><h3>Escala</h3><p>Reconoce casos delicados y deja el seguimiento al responsable correcto.</p></article>
-            <article class="capability"><span class="capability-number">06</span><h3>Mide</h3><p>Registra volumen, citas y resultados para revisar el desempeño operativo.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="industries" id="sectores">
-        <div class="container">
-          <div class="section-head">
-            <div><div class="section-kicker">Dónde genera valor</div><h2>Diseñado para operaciones donde cada llamada importa.</h2></div>
-            <p>HeroX funciona mejor cuando una conversación puede convertirse en visita, cita, cotización, servicio o seguimiento.</p>
-          </div>
-          <div class="industry-list">
-            <article class="industry"><span class="industry-index">01</span><h3>Bienes raíces</h3><p>Califica prospectos, responde disponibilidad y agenda visitas con asesores.</p></article>
-            <article class="industry"><span class="industry-index">02</span><h3>Seguridad y mantenimiento</h3><p>Clasifica cotizaciones, servicios e incidencias antes de escalar al equipo.</p></article>
-            <article class="industry"><span class="industry-index">03</span><h3>Servicios de salud</h3><p>Atiende dudas administrativas y organiza citas sin emitir diagnósticos.</p></article>
-            <article class="industry"><span class="industry-index">04</span><h3>Operaciones multisede</h3><p>Dirige cada solicitud a la sucursal, departamento o agenda correcta.</p></article>
+          <div class="work-card" aria-label="Ejemplo del trabajo realizado por HeroX">
+            <div class="work-head">
+              <div class="work-id"><div class="avatar">HX</div><div><strong>HeroX</strong><small>Operador telefónico digital</small></div></div>
+              <div class="status">Activo</div>
+            </div>
+            <div class="work-line"><div><span>Solicitud</span><strong>Prospecto solicita una visita</strong></div><b>Recibida</b></div>
+            <div class="work-line"><div><span>Acción</span><strong>Disponibilidad consultada</strong></div><b>Completa</b></div>
+            <div class="work-line"><div><span>Registro</span><strong>Cita y datos confirmados</strong></div><b>Guardado</b></div>
+            <div class="work-result"><p>Resultado de la interacción</p><strong>Cita registrada</strong></div>
           </div>
         </div>
       </section>
 
-      <section id="proceso">
+      <section class="fit" id="sectores">
         <div class="container">
-          <div class="section-head">
-            <div><div class="section-kicker">Activación</div><h2>Prueba el resultado antes de escalar.</h2></div>
-            <p>Comenzamos con un piloto controlado. Solo avanzamos cuando HeroX ya entiende el trabajo y cumple las reglas acordadas.</p>
+          <div class="section-intro">
+            <div><div class="section-label">Dónde genera valor</div><h2>Trabajo concreto, en operaciones reales.</h2></div>
+            <p>HeroX encaja donde una llamada puede convertirse en una visita, una cita, una cotización o un servicio.</p>
           </div>
-          <div class="process-grid">
-            <article class="step"><span>01</span><h3>Demostración</h3><p>Mostramos una llamada basada en un caso parecido a tu operación.</p></article>
-            <article class="step"><span>02</span><h3>Piloto</h3><p>Configuramos información, límites y una agenda para validar el trabajo.</p></article>
-            <article class="step"><span>03</span><h3>Implementación</h3><p>Realizamos pruebas, correcciones y conexión estándar de canales.</p></article>
-            <article class="step"><span>04</span><h3>Operación</h3><p>HeroX entra en servicio con métricas y capacidad según el plan elegido.</p></article>
+          <div class="fit-list">
+            <article class="fit-row"><span>01</span><h3>Bienes raíces</h3><p>Califica prospectos, responde disponibilidad y agenda visitas con asesores.</p></article>
+            <article class="fit-row"><span>02</span><h3>Seguridad y mantenimiento</h3><p>Clasifica cotizaciones, solicitudes de servicio e incidencias antes de escalarlas.</p></article>
+            <article class="fit-row"><span>03</span><h3>Servicios de salud</h3><p>Atiende dudas administrativas y organiza citas sin emitir diagnósticos.</p></article>
+            <article class="fit-row"><span>04</span><h3>Operaciones multisede</h3><p>Dirige cada solicitud a la sucursal, departamento o agenda correcta.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="company">
+        <div class="container">
+          <div class="section-intro">
+            <div><div class="section-label">Cómo incorporamos un empleado</div><h2>Primero demostramos. Después escalamos.</h2></div>
+            <p>La implementación comienza con un caso controlado y avanza cuando el empleado ya conoce el trabajo, los límites y el resultado esperado.</p>
+          </div>
+          <div class="value-grid">
+            <article class="value"><span>01</span><h3>Definimos el puesto</h3><p>Objetivos, funciones, información autorizada y reglas de escalamiento.</p></article>
+            <article class="value"><span>02</span><h3>Validamos el trabajo</h3><p>Probamos conversaciones, agenda, registros y casos delicados.</p></article>
+            <article class="value"><span>03</span><h3>Activamos la operación</h3><p>El empleado entra en servicio con capacidad y métricas según el plan.</p></article>
           </div>
         </div>
       </section>
 
       <section class="pricing" id="planes">
         <div class="container">
-          <div class="section-head">
-            <div><div class="section-kicker">Planes mensuales</div><h2>Capacidad operativa que crece contigo.</h2></div>
-            <p>Empieza con una agenda y escala a sucursales o departamentos adicionales sin cambiar de producto.</p>
+          <div class="section-intro">
+            <div><div class="section-label">Planes HeroX</div><h2>Capacidad que crece con tu empresa.</h2></div>
+            <p>Una misma base operativa que puede ampliarse a más áreas, agendas, sucursales y llamadas simultáneas.</p>
           </div>
           <div class="pricing-grid">
             <article class="plan">
-              <div class="plan-badge">Para iniciar</div><h3>Operación</h3><div class="price">$4,900<small>MXN + IVA / mes</small></div>
+              <div class="plan-label">Para iniciar</div><h3>Operación</h3><div class="price">$4,900<small>MXN + IVA / mes</small></div>
               <ul><li>400 minutos incluidos</li><li>1 unidad operativa</li><li>1 agenda y reglas propias</li><li>$6.00 por minuto adicional</li></ul>
-              <a class="button" href="#contacto">Solicitar información</a>
+              <a class="button light" href="#contacto">Solicitar información</a>
             </article>
             <article class="plan featured">
-              <div class="plan-badge">Recomendado</div><h3>Empresa</h3><div class="price">$8,900<small>MXN + IVA / mes</small></div>
+              <div class="plan-label">Recomendado</div><h3>Empresa</h3><div class="price">$8,900<small>MXN + IVA / mes</small></div>
               <ul><li>1,000 minutos incluidos</li><li>Hasta 2 unidades</li><li>Departamentos o agendas</li><li>$5.50 por minuto adicional</li></ul>
               <a class="button" href="#contacto">Solicitar demostración</a>
             </article>
             <article class="plan">
-              <div class="plan-badge">Varias ubicaciones</div><h3>Multisede</h3><div class="price">$14,900<small>MXN + IVA / mes</small></div>
+              <div class="plan-label">Varias ubicaciones</div><h3>Multisede</h3><div class="price">$14,900<small>MXN + IVA / mes</small></div>
               <ul><li>2,000 minutos incluidos</li><li>Hasta 4 unidades</li><li>Sucursales o departamentos</li><li>$5.00 por minuto adicional</li></ul>
-              <a class="button" href="#contacto">Solicitar información</a>
+              <a class="button light" href="#contacto">Solicitar información</a>
             </article>
             <article class="plan">
-              <div class="plan-badge">Alto volumen</div><h3>Corporativo</h3><div class="price">$24,900<small>MXN + IVA / mes · desde</small></div>
+              <div class="plan-label">Alto volumen</div><h3>Corporativo</h3><div class="price">$24,900<small>MXN + IVA / mes · desde</small></div>
               <ul><li>3,500 minutos incluidos</li><li>Hasta 6 unidades</li><li>Diseño según operación</li><li>$4.75 por minuto adicional</li></ul>
-              <a class="button" href="#contacto">Hablar con NODIC</a>
+              <a class="button light" href="#contacto">Hablar con NODIC</a>
             </article>
           </div>
-          <p class="pricing-note">Piloto validado: $1,490 + IVA · 14 días · 100 minutos. La implementación y conexiones especiales se cotizan según alcance.</p>
+          <p class="pricing-note">Piloto: $1,490 + IVA · 14 días · 100 minutos. La implementación y las conexiones especiales se cotizan según alcance.</p>
         </div>
       </section>
 
-      <section>
+      <section class="faq">
         <div class="container faq-grid">
-          <div><div class="section-kicker">Preguntas frecuentes</div><h2>Antes de incorporar a HeroX.</h2></div>
-          <div>
+          <div><div class="section-label">Preguntas frecuentes</div><h2>Lo esencial antes de empezar.</h2></div>
+          <div class="faq-list">
             <article class="faq-item open">
-              <button class="faq-question"><span>¿Puede trabajar con nuestro número actual?</span><span>+</span></button>
-              <div class="faq-answer"><p>Sí. Dependiendo del proveedor y la operación, podemos usar desvío de llamadas, importar el número o definir una línea dedicada. Se confirma durante la implementación.</p></div>
+              <button class="faq-question"><span>¿HeroX puede trabajar con nuestro número actual?</span><span>+</span></button>
+              <div class="faq-answer"><p>Sí. Según el proveedor, podemos usar desvío de llamadas, importar el número o definir una línea dedicada. Se confirma durante la implementación.</p></div>
             </article>
             <article class="faq-item">
-              <button class="faq-question"><span>¿HeroX puede negociar o cerrar ventas?</span><span>+</span></button>
-              <div class="faq-answer"><p>No en la versión actual. HeroX atiende, informa, califica, agenda y escala. Las negociaciones, acuerdos y decisiones delicadas permanecen con tu equipo.</p></div>
-            </article>
-            <article class="faq-item">
-              <button class="faq-question"><span>¿Cuántas llamadas puede atender al mismo tiempo?</span><span>+</span></button>
-              <div class="faq-answer"><p>La capacidad simultánea se define por plan: una operación puede iniciar con una llamada y crecer a varias unidades o líneas reservadas en configuraciones corporativas.</p></div>
+              <button class="faq-question"><span>¿Es una automatización genérica?</span><span>+</span></button>
+              <div class="faq-answer"><p>No. HeroX tiene un puesto concreto, conocimiento autorizado, límites, herramientas y métricas. La empresa contrata capacidad de trabajo, no un flujo aislado.</p></div>
             </article>
             <article class="faq-item">
               <button class="faq-question"><span>¿Cuánto tarda la implementación?</span><span>+</span></button>
-              <div class="faq-answer"><p>Una implementación estándar suele tomar entre 5 y 10 días hábiles, después de recibir la información, las reglas y los accesos necesarios.</p></div>
+              <div class="faq-answer"><p>Una implementación estándar suele tomar entre 5 y 10 días hábiles después de recibir la información, reglas y accesos necesarios.</p></div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="closing" id="contacto">
+      <section class="contact" id="contacto">
         <div class="container">
-          <div class="closing-card">
-            <div class="section-kicker" style="color:var(--mint)">Siguiente paso</div>
-            <h2>Escucha a HeroX trabajando para una empresa como la tuya.</h2>
-            <p>Agenda una demostración breve. Te mostraremos cómo atiende una llamada, recopila información y registra una cita sin exponer la tecnología interna.</p>
+          <div class="contact-card">
+            <div><div class="section-label" style="color:var(--mint)">Habla con NODIC AI</div><h2>Conoce cómo se incorpora un empleado digital.</h2><p>Solicita una demostración breve de HeroX y revisemos qué función puede asumir dentro de tu empresa.</p></div>
             <a class="button" href="https://wa.me/525579328860?text=Hola%20NODIC%20AI.%20Quiero%20solicitar%20una%20demostraci%C3%B3n%20de%20HeroX." target="_blank" rel="noreferrer">Solicitar demostración por WhatsApp <span aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -469,8 +427,8 @@
 
     <footer>
       <div class="container footer-grid">
-        <a class="brand footer-brand" href="#inicio"><span class="brand-mark"></span><span>NODIC <small>AI</small></span></a>
-        <span>HeroX · Operador telefónico digital</span>
+        <a class="brand" href="#inicio"><span class="brand-mark"></span><span>NODIC <small>AI</small></span></a>
+        <span>Fuerza laboral digital</span>
         <span>© 2026 NODIC AI</span>
       </div>
     </footer>
@@ -491,13 +449,6 @@
       document.querySelectorAll('.faq-question').forEach(button => button.addEventListener('click', () => {
         button.closest('.faq-item').classList.toggle('open');
       }));
-      let seconds = 102;
-      setInterval(() => {
-        seconds += 1;
-        const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-        const s = String(seconds % 60).padStart(2, '0');
-        document.getElementById('timer').textContent = `${m}:${s}`;
-      }, 1000);
     </script>
   </body>
 </html>
