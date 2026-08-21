@@ -154,6 +154,20 @@
       .company-item h3 { font-size: 19px; margin: 30px 0 8px; letter-spacing: -.03em; }
       .company-item p { color: var(--muted); font-size: 14px; margin: 0; }
 
+      .purpose { padding-top: 0; background: var(--white); }
+      .purpose-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 84px; align-items: center; }
+      .purpose-copy { display: grid; gap: 0; }
+      .purpose-item { padding: 27px 0; border-top: 1px solid var(--line); }
+      .purpose-item:last-child { border-bottom: 1px solid var(--line); }
+      .purpose-item span { display: block; color: var(--teal); font: 700 11px 'Manrope'; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
+      .purpose-item h3 { font-size: 24px; letter-spacing: -.04em; margin-bottom: 11px; }
+      .purpose-item p { color: var(--muted); margin-bottom: 0; }
+      .builder-visual { margin: 0; }
+      .builder-frame { overflow: hidden; border-radius: var(--radius); border: 1px solid var(--soft-line); background: #f2eee6; }
+      .builder-frame img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+      .builder-visual figcaption { display: flex; justify-content: space-between; gap: 22px; padding-top: 16px; color: var(--muted); font-size: 12px; }
+      .builder-visual figcaption strong { color: var(--ink); font-family: 'Manrope'; }
+
       .product-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 88px; align-items: center; }
       .product-copy h2 { margin-bottom: 25px; }
       .product-copy > p { color: var(--muted); font-size: 18px; max-width: 490px; }
@@ -228,7 +242,7 @@
         .nav-links a { padding: 10px; }
         .menu { display: block; }
         .nav-inner > .nav-cta { display: none; }
-        .hero-grid, .section-intro, .product-grid, .faq-grid, .contact-card { grid-template-columns: 1fr; gap: 42px; }
+        .hero-grid, .section-intro, .product-grid, .purpose-grid, .faq-grid, .contact-card { grid-template-columns: 1fr; gap: 42px; }
         .hero-aside { border-left: 0; border-top: 1px solid var(--line); padding: 30px 0 0; }
         .company-grid, .value-grid { grid-template-columns: 1fr; }
         .company-item, .company-item + .company-item { padding: 26px 0; border-right: 0; border-bottom: 1px solid var(--line); min-height: auto; }
@@ -264,8 +278,8 @@
         </a>
         <nav class="nav-links" id="navLinks">
           <a href="#nodic">NODIC</a>
+          <a href="#vision">Visión</a>
           <a href="#herox">HeroX</a>
-          <a href="#sectores">Sectores</a>
           <a href="#planes">Planes</a>
           <a class="button nav-cta" href="#contacto">Solicitar demostración</a>
         </nav>
@@ -306,6 +320,32 @@
             <article class="company-item"><span>02</span><h3>Integrados</h3><p>Trabajan con el conocimiento, las agendas y las reglas de la organización.</p></article>
             <article class="company-item"><span>03</span><h3>Escalables</h3><p>La capacidad aumenta por líneas, áreas, sucursales o nuevos roles.</p></article>
           </div>
+        </div>
+      </section>
+
+      <section class="purpose" id="vision">
+        <div class="container purpose-grid">
+          <div>
+            <div class="section-label">Dirección de NODIC AI</div>
+            <div class="purpose-copy">
+              <article class="purpose-item">
+                <span>Misión</span>
+                <h3>Convertir tecnología en capacidad de trabajo.</h3>
+                <p>Crear empleados digitales especializados que asuman funciones operativas reales y permitan a las empresas crecer con mayor continuidad, control y capacidad.</p>
+              </article>
+              <article class="purpose-item">
+                <span>Visión</span>
+                <h3>Construir la próxima fuerza laboral digital.</h3>
+                <p>Ser la infraestructura desde la que empresas y personas incorporen, administren y escalen equipos completos de trabajadores digitales.</p>
+              </article>
+            </div>
+          </div>
+          <figure class="builder-visual">
+            <div class="builder-frame">
+              <img src="/nodic-builder.webp" alt="Robot constructor de NODIC ensamblando nuevos módulos y empleados digitales" width="1440" height="960" loading="lazy" />
+            </div>
+            <figcaption><strong>Hoy, HeroX.</strong><span>Mañana, una familia completa de empleados digitales.</span></figcaption>
+          </figure>
         </div>
       </section>
 
